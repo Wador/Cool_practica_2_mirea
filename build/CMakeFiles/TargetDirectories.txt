@@ -1,3 +1,0 @@
-/home/vboxuser/Desktop/sysprog/prac2/build/CMakeFiles/console_utility.dir
-/home/vboxuser/Desktop/sysprog/prac2/build/CMakeFiles/edit_cache.dir
-/home/vboxuser/Desktop/sysprog/prac2/build/CMakeFiles/rebuild_cache.dir
