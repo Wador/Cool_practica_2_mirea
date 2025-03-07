@@ -4,6 +4,15 @@
 #include "users.h"
 #include "processes.h"
 #include "help.h"
+#include "log.h"
+#include "errors.h"
+
+void simulate_error() {
+	FILE *file = fopen("Non_existent_file.txt", "r");
+	if (file == NULL) {
+		perror("Error: Failed to open file"); // Искусственно созданая ошибка
+	}
+}
 
 int main(int argc, char *argv[]) {
     int opt;
@@ -39,19 +48,15 @@ int main(int argc, char *argv[]) {
 
     // Перенаправляем stdout в файл, если указан флаг -l
     if (log_path) {
-        if (freopen(log_path, "w", stdout) == NULL) {
-            perror("freopen");
-            return EXIT_FAILURE;
-        }
+        redirect_output(log_path);
     }
 
     // Перенаправляем stderr в файл, если указан флаг -e
     if (errors_path) {
-        if (freopen(errors_path, "w", stderr) == NULL) {
-            perror("freopen");
-            return EXIT_FAILURE;
-        }
+        redirect_errors(errors_path);
     }
+
+    simulate_error();
 
     // Выполняем команды в зависимости от флагов
     if (users_flag) {
